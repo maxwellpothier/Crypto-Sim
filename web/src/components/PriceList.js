@@ -1,43 +1,42 @@
 import React from 'react';
+import CurrencyCard from './CurrencyCard';
 import coingecko from '../api/coingecko';
-import '../styles/PriceList.css';
 
 class PriceList extends React.Component {
-  state = {
-    names: [],
-    currPrices: []
-  };
+  state = { cards: [] };
 
   componentDidMount() {
     this.loadAPI();
   }
 
   loadAPI = async () => {
-    const res = await coingecko.get('?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false');
+    const res = await coingecko.get('?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false');
     this.populateState(res);
+
+    console.log(res.data);
   }
 
   populateState(res) {
-    const coins = res.data.map((coin) => {
-      return <div>{coin.name}</div>
+    const cards = res.data.map((card) => {
+      return (
+        <CurrencyCard
+          key={card.symbol}
+          name={card.name}
+          price={card.current_price}
+          icon={card.image}
+          alt={card.id}
+          cap={card.market_cap}
+        />
+      );
     });
-
-    const prices = res.data.map((price) => {
-      return <div>{price.current_price}</div>
-    });
-
-    this.setState({ currPrices: prices });
-    this.setState({ names: coins });
+    this.setState({ cards: cards });
   }
 
   render() {
     return (
       <div>
         <h3>Price List</h3>
-        <div className="row">
-          <div className="column">{this.state.names}</div>
-          <div className="column">{this.state.currPrices}</div>
-        </div>
+        <div>{this.state.cards}</div>
       </div>
     );
   }

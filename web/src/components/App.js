@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from './Register';
+//import Register from './Register';
 import PriceList from './PriceList';
 
 class App extends React.Component {
@@ -12,7 +12,6 @@ class App extends React.Component {
     return (
       <div className="outline">
         <h3>Crypto Sim</h3>
-        <Register onClickSubmit={this.onFormSubmit} />
         <PriceList />
       </div>
     );

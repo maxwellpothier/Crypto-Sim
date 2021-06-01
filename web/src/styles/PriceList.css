@@ -1,11 +1,29 @@
-.column {
-  float: left;
-  width: 25%;
+.container {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 2px solid red;
 }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+img {
+  width: 50px;
 }
 
+.icon {
+  margin: auto;
+}
+
+.name {
+  margin: auto;
+}
+
+.price {
+  margin: auto;
+}
+
+.cap {
+  margin: auto;
+}
